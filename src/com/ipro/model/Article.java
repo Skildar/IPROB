@@ -64,7 +64,7 @@ public class Article {
         double facturingCost;
 
         for (String[] arrayData : FileManager.load("article", columnNames)) {
-            if (arrayData[0] == id) {
+            if (arrayData[0].equals(id)) {
                 name = arrayData[1];
                 brand = arrayData[2];
                 pricetag = Double.parseDouble(arrayData[3]);

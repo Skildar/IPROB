@@ -45,13 +45,16 @@ public class Order {
 
         for (String[] arrayData : FileManager.load("order", columnNames)) {
             article = new ArrayList<Article>();
-            DateFormat format = new SimpleDateFormat("d MMMM, yyyy", Locale.FRANCE);
+            DateFormat format = new SimpleDateFormat("d MMMM yyyy", Locale.FRANCE);
 
             String customerId = arrayData[1];
             String storeId = arrayData[2];
-            String[] articleList = arrayData[3].split(",");
+            String[] articleList = arrayData[3].split(", ");
             for (String s: articleList) {
-                article.add(Article.findById(s));
+                Article temp = Article.findById(s);
+                if (temp != null) {
+                    article.add(temp);
+                }
             }
             Date date = format.parse(arrayData[4]);
 

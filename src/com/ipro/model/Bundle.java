@@ -36,7 +36,10 @@ public class Bundle {
             article = new ArrayList<Article>();
             String[] articleList = arrayData[1].split(",");
             for (String s: articleList) {
-                article.add(Article.findById(s));
+                Article temp = Article.findById(s);
+                if (temp != null) {
+                    article.add(temp);
+                }
             }
             reduction = Float.parseFloat(arrayData[2]);
             Bundle bundle = new Bundle(article, reduction);

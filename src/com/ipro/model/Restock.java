@@ -43,7 +43,7 @@ public class Restock {
         ArrayList<Restock> restockList = new ArrayList<Restock>();
 
         for (String[] arrayData : FileManager.load("restock", columnNames)) {
-            DateFormat format = new SimpleDateFormat("d MMMM, yyyy", Locale.FRANCE);
+            DateFormat format = new SimpleDateFormat("d MMMM yyyy", Locale.FRANCE);
 
             String storeId = arrayData[1];
             String articleId = arrayData[2];

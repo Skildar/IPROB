@@ -34,9 +34,9 @@ public class FileManager {
                 fop.write(contentLine.getBytes());
                 fop.flush();
                 fop.close();
-                System.out.println("File is created!");
+                System.out.println("\"" + pathName + "\" file is created!");
             } else{
-                System.out.println("File already exists.");
+                System.out.println("\"" + pathName + "\" file already exists.");
             }
         } catch (IOException e) {
             e.printStackTrace();
