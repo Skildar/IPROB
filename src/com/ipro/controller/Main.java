@@ -37,8 +37,9 @@ public class Main {
      */
     public static void print() throws FileNotFoundException {
         /**
-         * TODO use a generic function to check every line
+         * TODO use the graphic interface to display every information
          */
+        String activePanel = "Article";
         for (Article article : Article.findAllArticle()) {
             System.out.println(article.getName());
         }

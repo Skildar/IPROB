@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Bundle {
     private static ArrayList<String> columnNames = new ArrayList<String>() {{
         add("Id");
-        add("article");
+        add("articleId");
         add("reduction");
     }};
 
