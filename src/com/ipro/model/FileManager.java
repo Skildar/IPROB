@@ -25,7 +25,6 @@ public class FileManager {
      */
     public static void createFile(String pathName, ArrayList<String> columnNames) {
         try {
-
             File file = new File(pathName);
 
             if (file.createNewFile()){

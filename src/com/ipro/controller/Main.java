@@ -20,7 +20,23 @@ public class Main {
             e.printStackTrace();
         }
         String activePanel = "Article";
-        App test = new App();
+
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                App.createAndShowGUI();
+            }
+        });
+
+//        SwingUtilities.invokeLater(new Runnable() {
+//            public void run() {
+//                App gui = new App();
+//                JFrame frame = new JFrame();
+//                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//                frame.getContentPane().add(gui);
+//                frame.pack();
+//                frame.setVisible(true);
+//            }
+//        });
     }
 
 
