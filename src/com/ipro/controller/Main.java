@@ -3,7 +3,9 @@ package com.ipro.controller;
 import com.ipro.model.*;
 import com.ipro.view.App;
 
+import javax.swing.*;
 import java.io.FileNotFoundException;
+import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 
 /**
@@ -12,31 +14,27 @@ import java.text.ParseException;
 public class Main {
     private static FileManager fileManager = new FileManager();
 
-    public static void main(String[] args) throws FileNotFoundException {
-
+    public static void main(String[] args) throws FileNotFoundException, InvocationTargetException, InterruptedException {
+        /**
+         * Console logging test
+         */
         try {
             print();
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        String activePanel = "Article";
 
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+        /**
+         * Swing application call
+         */
+        String activePanel = "Article";
+        final App view = new App(new JFrame());
+        SwingUtilities.invokeAndWait(new Runnable() {
             public void run() {
-                App.createAndShowGUI();
+                view.show();
             }
         });
 
-//        SwingUtilities.invokeLater(new Runnable() {
-//            public void run() {
-//                App gui = new App();
-//                JFrame frame = new JFrame();
-//                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//                frame.getContentPane().add(gui);
-//                frame.pack();
-//                frame.setVisible(true);
-//            }
-//        });
     }
 
 
