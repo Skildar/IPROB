@@ -1,6 +1,7 @@
 package com.ipro.model;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -74,6 +75,18 @@ public class Article {
             }
         }
         return null;
+    }
+
+    public static void save(Article article) throws IOException {
+        Integer id = FileManager.getNextId("article");
+        String content = "";
+
+        content = id + ";"
+                + article.getName() + ";"
+                + article.getBrand() + ";"
+                + article.getPricetag() + ";"
+                + article.getFacturingCost();
+        FileManager.addRow("article", content);
     }
 
     public String getName() {

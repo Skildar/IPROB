@@ -1,10 +1,7 @@
 package com.ipro.model;
 
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -25,7 +22,6 @@ public class FileManager {
      */
     public static void createFile(String pathName, ArrayList<String> columnNames) {
         try {
-
             File file = new File(pathName);
 
             if (file.createNewFile()){
@@ -42,6 +38,54 @@ public class FileManager {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Add a new line to specific file
+     * @param fileName
+     * @param content
+     */
+    public static void addRow(String fileName, String content) throws IOException {
+        String pathName = "." + dirPath + fileName + fileExtension;
+
+        FileWriter fw = new FileWriter(pathName, true);
+        BufferedWriter bw = new BufferedWriter(fw);
+
+        bw.write(content);
+        bw.newLine();
+        bw.close();
+    }
+
+    /**
+     * Returns the next available row Id
+     * @param fileName
+     * @return
+     */
+    public static Integer getNextId(String fileName) {
+        String pathName = "." + dirPath + fileName + fileExtension;
+        File file = new File(pathName);
+        Integer max = 0;
+
+        try {
+            Scanner sc = new Scanner(file);
+
+            /**
+             * Skip first line as it only contains column names (header)
+             */
+            sc.nextLine();
+
+            while (sc.hasNext()) {
+                String line = sc.nextLine();
+                String[] info = line.split(";");
+
+                if (max < Integer.parseInt(info[0])) {
+                    max = Integer.parseInt(info[0]);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return max + 1;
+    }
     
     /**
      * Loads data into the model using a filename and a class name
@@ -57,7 +101,6 @@ public class FileManager {
         createFile(pathName, columnNames);
         ArrayList<String[]> collection = new ArrayList<>();
         File file = new File(pathName);
-        //InputStream is = getClass().getResourceAsStream(fileName);
 
         try {
             Scanner sc = new Scanner(file);

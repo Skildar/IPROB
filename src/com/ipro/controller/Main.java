@@ -4,6 +4,7 @@ import com.ipro.model.*;
 import com.ipro.view.App;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.ParseException;
 
 /**
@@ -18,6 +19,8 @@ public class Main {
             print();
         } catch (ParseException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         String activePanel = "Article";
         App test = new App();
@@ -30,10 +33,11 @@ public class Main {
      * @throws FileNotFoundException
      * @throws ParseException
      */
-    public static void print() throws FileNotFoundException, ParseException {
+    public static void print() throws IOException, ParseException {
         System.out.println("-----  ----- Articles -----  -----");
         for (Article article : Article.findAllArticle()) {
             System.out.println(article.getName());
+            System.out.println(article.getFacturingCost());
         }
         System.out.println("-----  ----- Stores -----  -----");
         for (Store store : Store.findAllStore()) {
@@ -63,5 +67,9 @@ public class Main {
                 System.out.println("- " + article.getName());
             }
         }
+
+        System.out.println(FileManager.getNextId("article"));
+        Article article = new Article("name", "brand", 25, 35);
+        Article.save(article);
     }
 }
