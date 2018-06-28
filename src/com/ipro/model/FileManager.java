@@ -25,7 +25,6 @@ public class FileManager {
      */
     public static void createFile(String pathName, ArrayList<String> columnNames) {
         try {
-
             File file = new File(pathName);
 
             if (file.createNewFile()){
@@ -44,7 +43,28 @@ public class FileManager {
     }
 
     /**
+     * Add a new line to specific file
+     * @param fileName
+     * @param content
+     */
+    public static void addRow(String fileName, String content) {
+        String pathName = "." + dirPath + fileName + fileExtension;
+        File file = new File(pathName);
+
+        try {
+            fop = new FileOutputStream(file);
+            fop.write(content.getBytes());
+            fop.flush();
+            fop.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Returns the next available row Id
+     * @param fileName
+     * @return
      */
     public static Integer getNextId(String fileName) {
         String pathName = "." + dirPath + fileName + fileExtension;
