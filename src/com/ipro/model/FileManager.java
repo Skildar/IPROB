@@ -42,6 +42,36 @@ public class FileManager {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Returns the next available row Id
+     */
+    public static Integer getNextId(String fileName) {
+        String pathName = "." + dirPath + fileName + fileExtension;
+        File file = new File(pathName);
+        Integer max = 0;
+
+        try {
+            Scanner sc = new Scanner(file);
+
+            /**
+             * Skip first line as it only contains column names (header)
+             */
+            sc.nextLine();
+
+            while (sc.hasNext()) {
+                String line = sc.nextLine();
+                String[] info = line.split(";");
+
+                if (max < Integer.parseInt(info[0])) {
+                    max = Integer.parseInt(info[0]);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return max + 1;
+    }
     
     /**
      * Loads data into the model using a filename and a class name
@@ -57,7 +87,6 @@ public class FileManager {
         createFile(pathName, columnNames);
         ArrayList<String[]> collection = new ArrayList<>();
         File file = new File(pathName);
-        //InputStream is = getClass().getResourceAsStream(fileName);
 
         try {
             Scanner sc = new Scanner(file);

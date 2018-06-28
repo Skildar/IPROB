@@ -63,5 +63,7 @@ public class Main {
                 System.out.println("- " + article.getName());
             }
         }
+
+        System.out.println(FileManager.getNextId("article"));
     }
 }
