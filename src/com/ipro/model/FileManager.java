@@ -1,10 +1,7 @@
 package com.ipro.model;
 
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -47,18 +44,15 @@ public class FileManager {
      * @param fileName
      * @param content
      */
-    public static void addRow(String fileName, String content) {
+    public static void addRow(String fileName, String content) throws IOException {
         String pathName = "." + dirPath + fileName + fileExtension;
-        File file = new File(pathName);
 
-        try {
-            fop = new FileOutputStream(file);
-            fop.write(content.getBytes());
-            fop.flush();
-            fop.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        FileWriter fw = new FileWriter(pathName, true);
+        BufferedWriter bw = new BufferedWriter(fw);
+
+        bw.write(content);
+        bw.newLine();
+        bw.close();
     }
 
     /**
